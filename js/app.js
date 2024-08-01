@@ -10,6 +10,8 @@ const filterButtons = document.querySelectorAll(".filter-todos");
 let todos = JSON.parse(localStorage.getItem("todos")) || [];
 console.log(todos);
 
+const e2p = (s) => s.toString().replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[d]);
+
 // saveToLocalStorage function for Storing todos in local storage
 
 const saveToLocalStorage = () => {
@@ -56,7 +58,7 @@ const displayTodos = (data) => {
     todosBody.innerHTML += `
     <tr>
       <td>${todo.task}</td>
-      <td>${todo.date ? todo.date : "بدون تاریخ"}</td>
+      <td>${e2p(todo.date) ? e2p(todo.date) : "بدون تاریخ"}</td>
       <td>${todo.completed ? "تکمیل شده" : "در حال انجام"}</td>
       <td>
         <button onclick="edithandler('${todo.id}')">ویرایش</button>
