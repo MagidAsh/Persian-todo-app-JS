@@ -49,20 +49,20 @@ const displayTodos = (data) => {
   // console.log(todoList);
 
   if (!todoList.length) {
-    todosBody.innerHTML = "<tr><td colSpan='4'>No task found!</td></tr>";
+    todosBody.innerHTML = "<tr><td colSpan='4'>هیچ عنوانی یافت نشد!</td></tr>";
     return;
   }
   todoList.forEach((todo) => {
     todosBody.innerHTML += `
     <tr>
       <td>${todo.task}</td>
-      <td>${todo.date ? todo.date : "No Date"}</td>
-      <td>${todo.completed ? "Completed" : "Pending"}</td>
+      <td>${todo.date ? todo.date : "بدون تاریخ"}</td>
+      <td>${todo.completed ? "تکمیل شده" : "در حال انجام"}</td>
       <td>
-        <button onclick="edithandler('${todo.id}')">Edit</button>
+        <button onclick="edithandler('${todo.id}')">ویرایش</button>
         <button onclick="toggleHandler('${todo.id}')">
-        ${todo.completed ? "Undo" : "Do"}</button>
-        <button onclick="deleteHandler('${todo.id}')">Delete</button>
+        ${todo.completed ? "قبل" : "بعد"}</button>
+        <button onclick="deleteHandler('${todo.id}')">حذف</button>
       </td>
     </tr>`;
   });
@@ -87,9 +87,9 @@ const addHandler = () => {
     taskInput.value = "";
     dateInput.value = "";
     console.log(todos);
-    showAlert("Todo added successfully", "success");
+    showAlert("تودو با موفقیت اضافه شد", "success");
   } else {
-    showAlert("Please enter a todo!", "error");
+    showAlert("لطفا تودو را کامل وارد کنید!", "error");
   }
 };
 
@@ -100,9 +100,9 @@ const deleteAllHandler = () => {
     todos = [];
     saveToLocalStorage();
     displayTodos();
-    showAlert("All todos cleared successfully", "success");
+    showAlert("همه تودوها حذف گردید", "success");
   } else {
-    showAlert("No todos to clear", "error");
+    showAlert("هیچ تودویی برای حذف کردن وجو ندارد!", "error");
   }
 };
 
@@ -113,7 +113,7 @@ const deleteHandler = (id) => {
   todos = newTodos;
   saveToLocalStorage();
   displayTodos();
-  showAlert("Todo deleted successfully", "success");
+  showAlert("حذف شد", "success");
 };
 
 // toggleHandler function for Changing the status of todos
@@ -123,7 +123,7 @@ const toggleHandler = (id) => {
   todo.completed = !todo.completed;
   saveToLocalStorage();
   displayTodos();
-  showAlert("Todo status changed successfully", "success");
+  showAlert("وضعیت تودو تغییر کرد", "success");
 };
 
 // edithandler function for Making it possible to edit the todo
@@ -150,7 +150,7 @@ const applyEditHandler = (event) => {
   addButton.style.display = "inline-block";
   saveToLocalStorage();
   displayTodos();
-  showAlert("Todo edited successfully", "success");
+  showAlert("تودو با موفقیت ویرایش شد", "success");
 };
 
 // filterHandler function for Todo filtering
